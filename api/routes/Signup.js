@@ -13,6 +13,14 @@ router.post("/signup", async(req, res) => {
         res.status(400).json({
             message: "All input are required! Please make sure you complete each field with the required data"
         })
+    }else if(!/^[a-zA-Z ]*$/.test(fullname)){
+        res.status(400).json({
+            message: "Your name can only have alphabets"
+        })
+    }else if(!/^[a-zA-Z]*$/.test(username)){
+        res.status(400).json({
+            message: "This username is not valid, please remove white spaces and numbers"
+        })
     }
 })
 
