@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const User = require('../models/Usermodels')
 
 router.post("/signup", async(req, res) => {
     let {fullname, username, email, password, dateOfbirth} = req.body
@@ -25,6 +26,12 @@ router.post("/signup", async(req, res) => {
         res.status(400).json({
             message: "Please provide a valid email address!"
         })
+    }else if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8}$/.test(password)){
+        res.status(400).json({
+            message: "A strong password should be at least 8 characters long and have at least one uppercase and lower case  letter a number and any special character "
+        })
+    }else {
+        
     }
 })
 
