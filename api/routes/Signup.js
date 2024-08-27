@@ -31,7 +31,13 @@ router.post("/signup", async(req, res) => {
             message: "A strong password should be at least 8 characters long and have at least one uppercase and lower case  letter a number and any special character "
         })
     }else {
-        
+       User.find({email}).then(result => {
+            if(result.length){
+                res.status(400).json({
+                    message: "There is a user with this provided email address! Please log in instead"
+                })
+            }
+       })
     }
 })
 
