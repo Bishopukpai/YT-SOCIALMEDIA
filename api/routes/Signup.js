@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const User = require('../models/Usermodels')
+const bcrypt = require('bcrypt')
 
 router.post("/signup", async(req, res) => {
     let {fullname, username, email, password, dateOfbirth} = req.body
@@ -36,7 +37,30 @@ router.post("/signup", async(req, res) => {
                 res.status(400).json({
                     message: "There is a user with this provided email address! Please log in instead"
                 })
+            }else {
+                const saltRounds = 10;
+
+                bcrypt.hash(password, saltRounds).then(hashedPassword => {
+                    const newUser = new User({
+                        fullname,
+                        username,
+                        email,
+                        password:hashedPassword,
+                        dateOfbirth,
+                        verified:false
+                    })
+
+                   newUser.save().then(result => {
+
+                   }).catch(error => {
+                    console.log(error)
+                   })
+                }).catch(error => {
+                    console.log(error)
+                })
             }
+       }).catch(error => {
+            console.log(error)
        })
     }
 })

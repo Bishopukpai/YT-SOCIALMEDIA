@@ -30,6 +30,7 @@ const UserSchema = new Schema({
     dateOfbirth: {
         type: Date,  
     },
+    verified: Boolean,
     profilephoto: {
         type: String,
         default: ""
