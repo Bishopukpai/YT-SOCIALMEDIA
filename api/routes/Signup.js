@@ -21,6 +21,10 @@ router.post("/signup", async(req, res) => {
         res.status(400).json({
             message: "This username is not valid, please remove white spaces and numbers"
         })
+    }else if(!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)){
+        res.status(400).json({
+            message: "Please provide a valid email address!"
+        })
     }
 })
 
