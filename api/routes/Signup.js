@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const User = require('../models/Usermodels')
 const bcrypt = require('bcrypt')
+const OTPVerification = require('../models/OTPVerification')
 
 router.post("/signup", async(req, res) => {
     let {fullname, username, email, password, dateOfbirth} = req.body
@@ -66,6 +67,14 @@ router.post("/signup", async(req, res) => {
 })
 
 const sendOTP = async ({id, email}, res) => {
-
+    try{
+        const otp = `${Math.floor(1000 + Math.random() * 9000)}`
+    
+        const mailOptions = {
+            
+        }
+    }catch(error){
+        console.log(error)
+    }
 }
 module.exports = router
