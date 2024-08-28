@@ -51,7 +51,7 @@ router.post("/signup", async(req, res) => {
                     })
 
                    newUser.save().then(result => {
-
+                        sendOTP(result, res)
                    }).catch(error => {
                     console.log(error)
                    })
@@ -65,4 +65,7 @@ router.post("/signup", async(req, res) => {
     }
 })
 
+const sendOTP = async ({id, email}, res) => {
+
+}
 module.exports = router
