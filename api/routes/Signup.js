@@ -3,6 +3,8 @@ const User = require('../models/Usermodels')
 const bcrypt = require('bcrypt')
 const OTPVerification = require('../models/OTPVerification')
 
+require("dotenv").config()
+
 router.post("/signup", async(req, res) => {
     let {fullname, username, email, password, dateOfbirth} = req.body
 
@@ -71,8 +73,12 @@ const sendOTP = async ({id, email}, res) => {
         const otp = `${Math.floor(1000 + Math.random() * 9000)}`
     
         const mailOptions = {
-            
+            from: process.env.AUTH_EMAIL,
+            to: email,
+            subject: "Please Verify Your Account",
+            html: `<p>Welcome to our application.</p><p>Please use the code below to verify your account</p><p><b>${otp}</b></p><p>This is a one time password and will expire in one hour</p>`
         }
+        
     }catch(error){
         console.log(error)
     }
