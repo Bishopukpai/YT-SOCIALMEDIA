@@ -2,8 +2,17 @@ const router = require('express').Router()
 const User = require('../models/Usermodels')
 const bcrypt = require('bcrypt')
 const OTPVerification = require('../models/OTPVerification')
+const nodemailer = require('nodemailer');
 
 require("dotenv").config()
+
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.AUTH_EMAIL,
+        pass: process.env.AUTH_PASS
+    }
+})
 
 router.post("/signup", async(req, res) => {
     let {fullname, username, email, password, dateOfbirth} = req.body
@@ -89,7 +98,7 @@ const sendOTP = async ({_id, email}, res) => {
             expiresAt: Date.now() + 3600000
         })
 
-        
+        await newOTPVerification.save().then()
     }catch(error){
         console.log(error)
     }
