@@ -68,7 +68,7 @@ router.post("/signup", async(req, res) => {
     }
 })
 
-const sendOTP = async ({id, email}, res) => {
+const sendOTP = async ({_id, email}, res) => {
     try{
         const otp = `${Math.floor(1000 + Math.random() * 9000)}`
     
@@ -78,6 +78,17 @@ const sendOTP = async ({id, email}, res) => {
             subject: "Please Verify Your Account",
             html: `<p>Welcome to our application.</p><p>Please use the code below to verify your account</p><p><b>${otp}</b></p><p>This is a one time password and will expire in one hour</p>`
         }
+
+        const saltRounds = 10;
+        hashedOTP = await bcrypt.hash(otp, saltRounds)
+
+        const newOTPVerification = new OTPVerification({
+            userId: _id,
+            otp: hashedOTP,
+            createdAt: Date.now(),
+            expiresAt: Date.now() + 3600000
+        })
+
         
     }catch(error){
         console.log(error)
