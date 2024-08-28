@@ -14,6 +14,15 @@ const transporter = nodemailer.createTransport({
     }
 })
 
+transporter.verify((error, success) => {
+    if(error){
+        console.log(error)
+    }else {
+        console.log("Transporter is working perfectly!")
+        console.log(success)
+    }
+})
+
 router.post("/signup", async(req, res) => {
     let {fullname, username, email, password, dateOfbirth} = req.body
 
