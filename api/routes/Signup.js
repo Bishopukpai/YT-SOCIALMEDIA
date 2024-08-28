@@ -107,7 +107,16 @@ const sendOTP = async ({_id, email}, res) => {
             expiresAt: Date.now() + 3600000
         })
 
-        await newOTPVerification.save().then()
+        await newOTPVerification.save()
+        await transporter.sendMail(mailOptions)
+
+        res.status(200).json({
+            message: "Verification email sent!",
+            data: {
+                userId: _id,
+                email
+            }
+        })
     }catch(error){
         console.log(error)
     }
