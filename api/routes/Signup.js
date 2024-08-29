@@ -104,7 +104,7 @@ const sendOTP = async ({_id, email}, res) => {
             userId: _id,
             otp: hashedOTP,
             createdAt: Date.now(),
-            expiresAt: Date.now() + 3600000
+            expiresAt: Date.now() + 5000
         })
 
         await newOTPVerification.save()

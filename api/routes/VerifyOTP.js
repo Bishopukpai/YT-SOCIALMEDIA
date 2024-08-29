@@ -13,7 +13,7 @@ route.post("/verifyotp", async(req, res) => {
                 message: "Please provide a one-time password!"
             })
         }else {
-            const OTPVerificationRecord = await OTPVerification({userId})
+            const OTPVerificationRecord = await OTPVerification.find({userId})
 
             if(OTPVerificationRecord.length <= 0){
                 res.status(400).json({
@@ -51,6 +51,7 @@ route.post("/verifyotp", async(req, res) => {
             }
         }
     }catch (error){
+        console.log(error)
         res.status(500).json({
             message: "Internal server error!"
         })
