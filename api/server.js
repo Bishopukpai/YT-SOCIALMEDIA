@@ -21,6 +21,7 @@ app.use('/api/auth', signupRoute)
 app.use('/api/auth', signinRoute)
 app.use("/api/user", verifyotpRoute)
 
+
 app.listen(port, ()=> {
     console.log(`Server is running on port ${port}`)
 }) 

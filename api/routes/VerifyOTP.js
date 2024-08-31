@@ -41,7 +41,7 @@ route.post("/verifyotp", async(req, res) => {
                     }else {
                         await User.updateOne({_id:userId}, {verified:true})
 
-                        await OTPVerification.deleteMany(userId)
+                        await OTPVerification.deleteMany({userId})
 
                         res.status(200).json({
                             message: "Verified!"
