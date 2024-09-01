@@ -21,6 +21,18 @@ router.post("/signin", (req, res)=> {
                     })
                 }else {
                     const hashedPassword = data[0].password
+
+                    bcrypt.compare(password, hashedPassword).then(result => {
+                        if(result){
+                            res.status(200).json({
+                                message: "You Signed successfully!"
+                            })
+                        }else {
+                            res.status(400).json({
+                                message: "Incorrect Password!"
+                            })
+                        }
+                    })
                 }
             }
         })
