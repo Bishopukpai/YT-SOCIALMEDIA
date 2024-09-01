@@ -32,9 +32,21 @@ router.post("/signin", (req, res)=> {
                                 message: "Incorrect Password!"
                             })
                         }
+                    }).catch(error => {
+                        res.status(500).json({
+                            message: "Internal server error"
+                        })
                     })
                 }
+            }else {
+                res.status(404).json({
+                    message: "There is no user with the provided email address!"
+                })
             }
+        }).catch(error => {
+            res.status(500).json({
+                message: "Internal server error"
+            })
         })
     }
 })
