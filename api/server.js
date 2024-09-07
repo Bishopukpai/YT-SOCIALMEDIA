@@ -7,6 +7,7 @@ const userRoute = require('./routes/User')
 const signupRoute = require('./routes/Signup')
 const signinRoute = require('./routes/Signin')
 const verifyotpRoute = require('./routes/VerifyOTP')
+const postRoute = require('./routes/Post')
 
 const app = express()
 
@@ -20,7 +21,7 @@ app.use("/api/user", userRoute)
 app.use('/api/auth', signupRoute)
 app.use('/api/auth', signinRoute)
 app.use("/api/user", verifyotpRoute)
-
+app.use('/api/post', postRoute)
 
 app.listen(port, ()=> {
     console.log(`Server is running on port ${port}`)
